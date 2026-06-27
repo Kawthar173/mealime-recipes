@@ -7,7 +7,7 @@ window.RECIPES = [
     "pcosScore": 95,
     "time": "30 minutes",
     "servings": 1,
-    "image": "black-bean-puree-fried-eggs.png",
+    "image": "Black Bean Purée & Fried Eggs with Avocado & Grape Tomatoes.png",
     "tags": [
       "PCOS-friendly",
       "High fiber",
