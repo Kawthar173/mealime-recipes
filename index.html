@@ -2,18 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Koko's PCOS Follicular Phase Recipes</title>
-  <style>
-    body{font-family:Arial,sans-serif;max-width:850px;margin:40px auto;padding:0 18px;line-height:1.55;color:#172016}a{color:#1d6b36}.card{border:1px solid #ddd;border-radius:14px;padding:18px;margin:16px 0;background:#fafafa}img{max-width:100%;border-radius:14px}.tag{display:inline-block;background:#e7f4ea;border-radius:999px;padding:4px 10px;margin-right:6px;font-size:14px}</style>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kawthar's PCOS Cookbook</title>
+  <meta name="description" content="Personal PCOS-friendly, high-protein, high-fiber recipes optimized by cycle phase.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Koko's PCOS Follicular Phase Recipes</h1>
-  <p>Optimized recipes for protein, soluble fiber, satiety, and early follicular phase support.</p>
-  <div class="card">
-    <h2><a href="black-bean-puree-fried-eggs.html">Black Bean Purée & Fried Eggs with Avocado & Grape Tomatoes</a></h2>
-    <p><span class="tag">PCOS-friendly</span><span class="tag">High fiber</span><span class="tag">High protein</span><span class="tag">1 serving</span></p>
-    <img src="black-bean-puree-fried-eggs.png" alt="Black bean purée and fried eggs with avocado and grape tomatoes">
-  </div>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="badge">🌿 PCOS-Friendly Personal Cookbook</span>
+      <h1>Kawthar's Cycle-Smart Recipes</h1>
+      <p>High-protein, high-fiber recipes optimized for PCOS, sustainable fat loss, satiety, and cycle phase support. Because apparently meals need strategy now. Sensible, annoying, effective.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toolbar">
+      <input id="search" placeholder="Search recipes...">
+      <select id="category">
+        <option value="">All meals</option>
+      </select>
+      <select id="phase">
+        <option value="">All phases</option>
+      </select>
+      <select id="tag">
+        <option value="">All tags</option>
+      </select>
+    </div>
+
+    <section class="grid" id="recipes"></section>
+  </main>
+
+  <footer class="footer">Built for practical consistency, not wellness theater.</footer>
+
+  <script src="recipes.js"></script>
+  <script>
+    const recipes = window.RECIPES || [];
+    const els = {
+      grid: document.getElementById('recipes'),
+      search: document.getElementById('search'),
+      category: document.getElementById('category'),
+      phase: document.getElementById('phase'),
+      tag: document.getElementById('tag')
+    };
+
+    function unique(arr){ return [...new Set(arr.filter(Boolean))].sort(); }
+
+    unique(recipes.map(r => r.category)).forEach(v => els.category.add(new Option(v, v)));
+    unique(recipes.map(r => r.phase)).forEach(v => els.phase.add(new Option(v, v)));
+    unique(recipes.flatMap(r => r.tags || [])).forEach(v => els.tag.add(new Option(v, v)));
+
+    function render(){
+      const q = els.search.value.toLowerCase().trim();
+      const cat = els.category.value;
+      const phase = els.phase.value;
+      const tag = els.tag.value;
+
+      const filtered = recipes.filter(r => {
+        const hay = [r.title, r.category, r.phase, ...(r.tags||[])].join(' ').toLowerCase();
+        return (!q || hay.includes(q)) &&
+               (!cat || r.category === cat) &&
+               (!phase || r.phase === phase) &&
+               (!tag || (r.tags||[]).includes(tag));
+      });
+
+      els.grid.innerHTML = filtered.map(r => `
+        <a class="card" href="${r.slug}.html">
+          <img src="${r.image}" alt="${r.title}">
+          <div class="card-body">
+            <div class="meta">
+              <span class="pill">${r.category}</span>
+              <span class="pill gold">${r.phase}</span>
+              <span class="pill">⭐ ${r.pcosScore}/100</span>
+            </div>
+            <h2>${r.title}</h2>
+            <div class="stats">
+              <div class="stat"><strong>${r.nutrition.protein}</strong><span>Protein</span></div>
+              <div class="stat"><strong>${r.nutrition.fiber}</strong><span>Fiber</span></div>
+              <div class="stat"><strong>${r.time}</strong><span>Time</span></div>
+            </div>
+          </div>
+        </a>
+      `).join('') || '<p>No recipes found. Tragic, but fixable.</p>';
+    }
+
+    ['input','change'].forEach(ev => {
+      els.search.addEventListener(ev, render);
+      els.category.addEventListener(ev, render);
+      els.phase.addEventListener(ev, render);
+      els.tag.addEventListener(ev, render);
+    });
+    render();
+  </script>
 </body>
 </html>

@@ -1,0 +1,132 @@
+
+:root{
+  --bg:#f7f3ea;
+  --card:#fffaf1;
+  --ink:#1f2a22;
+  --muted:#6f766d;
+  --green:#1f6b45;
+  --green2:#2f8b5f;
+  --cream:#fff7e4;
+  --line:#eadfc9;
+  --gold:#d99a32;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#fbf7ef 0%,#f7f3ea 100%);
+  color:var(--ink);
+}
+a{color:inherit;text-decoration:none}
+.hero{
+  padding:48px 20px 34px;
+  background:radial-gradient(circle at top right,#e2f0df,transparent 40%),linear-gradient(135deg,#143b29,#2a7a50);
+  color:white;
+}
+.hero-inner{max-width:1100px;margin:auto}
+.badge{
+  display:inline-flex;gap:8px;align-items:center;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:999px;
+  padding:8px 13px;
+  font-size:14px;
+}
+h1{font-size:42px;line-height:1.05;margin:18px 0 12px}
+.hero p{max-width:720px;color:#ecf7ef;font-size:17px;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+.toolbar{
+  display:grid;
+  grid-template-columns:1fr repeat(3, minmax(140px,180px));
+  gap:12px;
+  margin-top:-48px;
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  box-shadow:0 12px 28px rgba(30,50,35,.12);
+  border-radius:22px;
+  padding:14px;
+  backdrop-filter: blur(8px);
+}
+input,select{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:13px 14px;
+  font-size:15px;
+  background:white;
+  color:var(--ink);
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:18px;
+  margin-top:26px;
+}
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 10px 24px rgba(30,50,35,.08);
+  transition:.18s transform,.18s box-shadow;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(30,50,35,.14)}
+.card img{
+  width:100%;height:210px;object-fit:cover;background:#e9efe6;
+}
+.card-body{padding:18px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.pill{
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  background:#edf7ef;
+  color:#236143;
+  font-weight:600;
+}
+.pill.gold{background:#fff0d2;color:#8b5a0d}
+.card h2{font-size:21px;margin:0 0 12px;line-height:1.22}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stat{background:#faf6ed;border:1px solid var(--line);border-radius:14px;padding:10px}
+.stat strong{display:block;font-size:14px}
+.stat span{font-size:12px;color:var(--muted)}
+.recipe-hero{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:28px;
+  align-items:center;
+  padding:34px 0 20px;
+}
+.recipe-hero img{
+  width:100%;
+  border-radius:28px;
+  box-shadow:0 18px 38px rgba(30,50,35,.17);
+  border:1px solid var(--line);
+}
+.back{display:inline-block;margin-top:20px;color:var(--green);font-weight:700}
+.recipe-title{font-size:40px;margin:12px 0 10px}
+.section{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:22px;
+  margin-top:18px;
+  box-shadow:0 8px 20px rgba(30,50,35,.06);
+}
+.section h2{margin:0 0 14px;font-size:24px}
+.two-col{display:grid;grid-template-columns:1fr 1.2fr;gap:18px}
+.ingredients li,.instructions li,.why li{margin:10px 0;line-height:1.5}
+.ingredients strong{color:var(--green)}
+.nutrition{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;
+}
+.nutrition div{
+  border:1px solid var(--line);border-radius:16px;background:#fffaf1;padding:13px;
+}
+.nutrition strong{display:block;color:var(--green);font-size:18px}
+.footer{color:var(--muted);text-align:center;padding:30px}
+@media(max-width:780px){
+  h1,.recipe-title{font-size:32px}
+  .toolbar{grid-template-columns:1fr;margin-top:-36px}
+  .recipe-hero,.two-col{grid-template-columns:1fr}
+}
